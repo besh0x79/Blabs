@@ -2,7 +2,7 @@
 
 > **Vulnerability Class:** Race Condition (TOCTOU)\
 > **Target System:** LogVault™ Enterprise Audit Console\
-> **Difficulty:** Medium → Advanced
+> **Difficulty:** Easy
 
 ------------------------------------------------------------------------
 
