@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogVault™ Enterprise | internal-console</title>
+    <style>
+        :root {
+            --primary: #0066ff;
+            --bg: #ffffff;
+            --surface: #f6f8fa;
+            --border: #d0d7de;
+            --text-main: #1f2328;
+            --text-muted: #656d76;
+            --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        nav {
+            height: 60px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            justify-content: space-between;
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .user-nav {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        main {
+            flex: 1;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            background: var(--bg);
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        #console-wrapper {
+            display: none;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            background: #0d1117;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .console-header {
+            background: #161b22;
+            padding: 12px 20px;
+            font-size: 12px;
+            color: #8b949e;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        pre {
+            margin: 0;
+            padding: 24px;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #e6edf3;
+            white-space: pre-wrap;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="brand">
+            <div class="brand-icon"></div>
+            LogVault Enterprise
+        </div>
+        <div class="user-nav">
+            <span>Documentation</span>
+            <span>Support</span>
+            <span style="font-weight: 600; color: var(--text-main)">Admin Session</span>
+        </div>
+    </nav>
+
+    <main>
+        <header>
+            <h1>Security Event Explorer</h1>
+            <p class="subtitle">
+                Monitor and inspect real-time system logs across distributed services.
+                All requests are processed concurrently for performance optimization.
+            </p>
+        </header>
+
+        <div class="grid">
+            <div class="card" onclick="fetchLog('system.log')">
+                <span class="card-title">System Runtime</span>
+                <span class="card-desc">
+                    Real-time system activity logs generated by internal services.
+                    Streams are dynamically resolved per request.
+                </span>
+            </div>
+            <div class="card" onclick="fetchLog('network.log')">
+                <span class="card-title">Network Traffic</span>
+                <span class="card-desc">
+                    Network-level logging for active connections and routing behavior.
+                    Data consistency may vary under heavy load.
+                </span>
+            </div>
+        </div>
+
+        <p style="font-size:12px; color:#8b949e; margin-bottom:10px;">
+            Note: Log streams are handled asynchronously. Results may vary depending on request timing.
+        </p>
+
+        <div id="console-wrapper">
+            <div class="console-header">
+                <span id="log-name">RAW OUTPUT</span>
+                <span>SESSION: ADMIN-THREAD-01</span>
+            </div>
+            <pre id="output">Initializing log stream handler...
+Resolving file path...
+Syncing shared state...</pre>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 LogVault Systems Inc. • Internal Use Only • Concurrent Log Engine v4.2.0 • Build: threaded-release
+    </footer>
+
+    <script>
+        async function fetchLog(filename) {
+            const wrapper = document.getElementById('console-wrapper');
+            const output = document.getElementById('output');
+            const logName = document.getElementById('log-name');
+
+            wrapper.style.display = 'block';
+            output.innerText = "Synchronizing with remote node...\nRebuilding state...";
+
+            try {
+                const response = await fetch(`/view?file=${filename}`);
+                const data = await response.text();
+                output.innerText = data;
+                logName.innerText = `LOG_STREAM: ${filename.toUpperCase()}`;
+            } catch (e) {
+                output.innerText = "Warning: Log stream interrupted. State mismatch detected.";
+            }
+        }
+    </script>
+</body>
+</html>

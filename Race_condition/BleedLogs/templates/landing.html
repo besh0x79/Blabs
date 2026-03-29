@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BleedLogs v1.0</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;800&family=JetBrains+Mono&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #b04a44; /* أحمر باهت قديم */
+  --bg: #080808;
+  --accent: #151515;
+}
+
+body {
+  background: var(--bg);
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.mission-container {
+  max-width: 950px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  padding: 40px;
+  align-items: center;
+}
+
+.poster-frame {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #222;
+}
+
+.poster-frame img {
+  width: 100%;
+  display: block;
+  filter: contrast(1.1);
+}
+
+.content h1 {
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 14px;
+  color: #aaa;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  max-width: 480px;
+}
+
+.specs {
+  margin-bottom: 40px;
+  border-top: 1px solid var(--accent);
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--accent);
+  font-size: 13px;
+}
+
+.spec-item b {
+  color: #555;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.btn-start {
+  display: block;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+  text-align: center;
+  padding: 18px;
+  font-family: 'JetBrains Mono';
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.btn-start:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.footer {
+  margin-top: 30px;
+  font-family: 'JetBrains Mono';
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.creator {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.created-text {
+  color: #ddd; 
+}
+
+.creator-name {
+  color: #b04a44; 
+  margin-left: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="mission-container">
+  
+  <div class="poster-frame">
+    <img src="/static/images/lab-poster.png" alt="BleedLogs">
+  </div>
+
+  <div class="content">
+    
+    <h1>BleedLogs v1.0</h1>
+
+    <div class="description">
+      The application provides access to log files within a restricted directory. 
+      Path validation is enforced, however request handling depends on shared mutable state. 
+      Concurrent access may lead to inconsistent path resolution.
+    </div>
+
+    <div class="specs">
+      <div class="spec-item"><b>Difficulty</b> <span>Medium</span></div>
+      <div class="spec-item"><b>Category</b> <span>Web Exploitation</span></div>
+      <div class="spec-item"><b>Vulnerability</b> <span>Race Condition</span></div>
+      <div class="spec-item"><b>Impact</b> <span>Arbitrary File Read</span></div>
+      <div class="spec-item"><b>Objective</b> <span>Retrieve the flag</span></div>
+    </div>
+
+    <a href="/console" class="btn-start">Go Dark</a>
+
+    <div class="footer">
+      <span style="color:#555;">ID: BL-8829-X</span>
+
+      <span class="creator">
+        <span class="created-text">Created by</span>
+        <span class="creator-name">Besh0x79</span>
+      </span>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
