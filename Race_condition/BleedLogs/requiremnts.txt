@@ -1,0 +1,8 @@
+# Core Framework
+Flask==3.0.2
+
+# WSGI Server (Recommended for stability)
+gunicorn==21.2.0
+
+# Optional: Security headers helper
+Flask-Talisman==1.1.0
